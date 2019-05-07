@@ -224,10 +224,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-4" id="img-div">
+                    <div id="img-div" style="float: left; display: inline-block;">
 
                     </div>
-                    <div class="col-8" id="content-div">
+                    <div id="content-div" style="float: left; display: inline-block; margin-left: 10px;">
 
                     </div>
                 </div>
@@ -240,6 +240,10 @@
             <a href="/api/friends">API friends list</a> | <a href="https://github.com">Github Repo</a>
         </div>
     </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script>
         document.getElementById("navToHome-btn").onclick = function () {
@@ -281,20 +285,27 @@
                     }
 
                     if (score < bestScore) {
-                        bestFriend = friends[i];
+                        if (friends[i].name !== friend.name && friends[i].photo !== friend.photo) {
+                            bestFriend = friends[i];
+
+                        }
                     }
                 }
 
+                console.log(bestFriend);
+
+                $("#img-div").empty();
+                $("#content-div").empty();
                 let img = $("<img>");
                 img.attr("src", bestFriend.photo);
-                img.css("height", "300px");
-                img.css("width", "300px");
+                img.css("height", "150px");
+                img.css("width", "150px");
                 let body = $("<h3>");
                 body.text(bestFriend.name);
                 $("#img-div").append(img);
                 $("#content-div").append(body);
 
-                $("#friendsModal").moda
+                $("#friendsModal").modal("toggle");
             });
         }
     </script>
